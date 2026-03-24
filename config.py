@@ -11,7 +11,7 @@ TELEGRAM_BOT_TOKEN: str = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID:   str = os.environ.get("TELEGRAM_CHAT_ID", "")
 
 # ── Chains ──────────────────────────────────────────────────
-CHAINS: list[str] = ["ethereum", "solana", "arbitrum", "base"]
+CHAINS: list[str] = ["ethereum", "solana", "arbitrum", "base", "bitcoin"]
 
 # ── Polling ────────────────────────────────────────────────
 POLL_INTERVAL_MIN: int = 30        # schedule interval
