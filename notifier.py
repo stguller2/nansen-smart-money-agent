@@ -2,8 +2,10 @@
 
 import asyncio
 from typing import TYPE_CHECKING
+import requests
 
 import config
+import insight_generator
 
 if TYPE_CHECKING:
     from analyzer import Alert
@@ -42,6 +44,10 @@ def format_message(alert: "Alert") -> str:
         lines.append(f"🏷️  Wallet:     {alert.label}")
 
     lines.append(f"⭐ Score:       *{alert.score:.1f}/10*")
+
+    insight = insight_generator.generate_insight(alert)
+    lines.append("")
+    lines.append(f"🧠 *Insight:* {insight}")
 
     lines += [
         f"⏰ Time:       {alert.timestamp}",
@@ -98,6 +104,14 @@ def send(alert: "Alert", dry_run: bool = False) -> bool:
     if dry_run or not config.TELEGRAM_BOT_TOKEN:
         print("  [DRY RUN — Telegram not sent]\n")
         return True
+
+    # Discord sending
+    if config.DISCORD_WEBHOOK_URL and not dry_run:
+        try:
+            requests.post(config.DISCORD_WEBHOOK_URL, json={"content": msg})
+            print("  ✅  Discord alert sent!")
+        except Exception as e:
+            print(f"  ⚠️  Discord error: {e}")
 
     try:
         asyncio.run(_send_async(alert, msg))

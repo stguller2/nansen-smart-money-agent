@@ -51,8 +51,10 @@ def is_duplicate(alert: "Alert") -> bool:
     return False
 
 
+import insight_generator
+
 def record(alert: "Alert"):
-    """Append a fired alert to the log."""
+    """Append a fired alert to the log and generate output signal."""
     records = _load()
     records.append({
         "key":      f"{alert.token}:{alert.chain}:{alert.signal}",
@@ -63,6 +65,30 @@ def record(alert: "Alert"):
         "fired_at": datetime.now(timezone.utc).isoformat(),
     })
     _save(records)
+    
+    # ── Save production-grade signals ────────────────────
+    out_file = "outputs/signals.json"
+    signals = []
+    if os.path.exists(out_file):
+        try:
+            with open(out_file, "r") as f:
+                signals = json.load(f)
+        except Exception:
+            pass
+            
+    signals = signals[-49:]  # keep last 50
+    signals.append({
+        "token": alert.token,
+        "signal_type": alert.signal,
+        "confidence_score": round(alert.score * 10, 1), # 0-100 scale 
+        "explanation": insight_generator.generate_insight(alert),
+        "chain": alert.chain,
+        "flow_usd": alert.flow_usd,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    })
+    
+    with open(out_file, "w") as f:
+        json.dump(signals, f, indent=2)
 
 
 def recent_alerts(hours: int = 24) -> list[dict]:

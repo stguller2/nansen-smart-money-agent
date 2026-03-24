@@ -16,6 +16,9 @@ NANSEN_API_KEY: str = os.environ.get("NANSEN_API_KEY", "")
 TELEGRAM_BOT_TOKEN: str = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID:   str = os.environ.get("TELEGRAM_CHAT_ID", "")
 
+# ── Discord ────────────────────────────────────────────────
+DISCORD_WEBHOOK_URL: str = os.environ.get("DISCORD_WEBHOOK_URL", "")
+
 # ── Chains ──────────────────────────────────────────────────
 CHAINS: list[str] = [
     "ethereum",
