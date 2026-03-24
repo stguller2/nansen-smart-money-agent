@@ -3,6 +3,12 @@
 import os
 import sys
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # reads .env file automatically
+except ImportError:
+    pass
+
 # ── Nansen ────────────────────────────────────────────────
 NANSEN_API_KEY: str = os.environ.get("NANSEN_API_KEY", "")
 
