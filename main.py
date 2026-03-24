@@ -36,27 +36,29 @@ def poll(demo: bool = False):
     print(f"  🔍  Polling Nansen  [{ts}]")
     print(f"{'─'*52}")
 
-    # Fetch all data sources
-    print("  📡  Fetching Smart Money netflows (Ethereum)...")
-    netflow_eth = fetcher.fetch_netflow_ethereum(demo=demo)
-    print(f"       {len(netflow_eth)} token(s) returned")
+    # Fetch all data sources dynamically
+    data_by_chain = {}
+    
+    for chain in config.CHAINS:
+        print(f"  📡  Fetching Smart Money netflows ({chain.capitalize()})...")
+        netflows = fetcher.fetch_netflow(chain, demo=demo)
+        print(f"       {len(netflows)} token(s) returned")
 
-    print("  📡  Fetching Smart Money netflows (Solana)...")
-    netflow_sol = fetcher.fetch_netflow_solana(demo=demo)
-    print(f"       {len(netflow_sol)} token(s) returned")
+        print(f"  📡  Fetching DEX trades ({chain.capitalize()})...")
+        dexes = fetcher.fetch_dex_trades(chain, demo=demo)
+        print(f"       {len(dexes)} trade(s) returned")
 
-    print("  📡  Fetching DEX trades (Ethereum)...")
-    dex_eth = fetcher.fetch_dex_trades_ethereum(demo=demo)
-    print(f"       {len(dex_eth)} trade(s) returned")
+        data_by_chain[chain] = (netflows, dexes)
 
-    print("  📡  Fetching token screener (Ethereum)...")
-    screener_eth = fetcher.fetch_token_screener_ethereum(demo=demo)
+    # Optional: fetch screener for extra data if needed elsewhere
+    print(f"  📡  Fetching token screener (Ethereum)...")
+    screener_eth = fetcher.fetch_token_screener("ethereum", demo=demo)
     print(f"       {len(screener_eth)} token(s) returned")
 
     print(f"\n  📊  Total API calls so far: {fetcher.total_calls}")
 
     # Run analyzers
-    alerts = analyzer.run_all(netflow_eth, netflow_sol, dex_eth)
+    alerts = analyzer.run_all(data_by_chain)
 
     if not alerts:
         print("\n  ✅  No signals triggered this cycle.")

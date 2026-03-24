@@ -41,6 +41,8 @@ def format_message(alert: "Alert") -> str:
     else:
         lines.append(f"🏷️  Wallet:     {alert.label}")
 
+    lines.append(f"⭐ Score:       *{alert.score:.1f}/10*")
+
     lines += [
         f"⏰ Time:       {alert.timestamp}",
         "━━━━━━━━━━━━━━━━━━━━━━━━",
@@ -62,13 +64,21 @@ def format_console(alert: "Alert") -> str:
     return format_message(alert).replace("*", "").replace("_", "")
 
 
-async def _send_async(message: str):
-    from telegram import Bot
+async def _send_async(alert: "Alert", message: str):
+    from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
     bot = Bot(token=config.TELEGRAM_BOT_TOKEN)
+    
+    chain_slug = "ethereum" if "eth" in alert.chain.lower() else "solana" if "sol" in alert.chain.lower() else alert.chain.lower()
+    url = f"https://dexscreener.com/{chain_slug}/{alert.token.lower()}"
+    
+    keyboard = [[InlineKeyboardButton("📊 DexScreener Chart", url=url)]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
     await bot.send_message(
-        chat_id    = config.TELEGRAM_CHAT_ID,
-        text       = message,
-        parse_mode = "Markdown",
+        chat_id      = config.TELEGRAM_CHAT_ID,
+        text         = message,
+        parse_mode   = "Markdown",
+        reply_markup = reply_markup,
     )
 
 
@@ -90,7 +100,7 @@ def send(alert: "Alert", dry_run: bool = False) -> bool:
         return True
 
     try:
-        asyncio.run(_send_async(msg))
+        asyncio.run(_send_async(alert, msg))
         print("  ✅  Telegram alert sent!\n")
         return True
     except Exception as e:

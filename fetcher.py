@@ -79,42 +79,35 @@ def _list(response: dict) -> list:
 
 # ── public fetch functions ─────────────────────────────────
 
-def fetch_netflow_ethereum(demo=False) -> list:
-    """Smart Money net flows — Ethereum, 1h window."""
+def fetch_netflow(chain: str, demo=False) -> list:
+    """Smart Money net flows for a specific chain, 1h window."""
+    key = f"netflow_{chain[:3]}"
     data = run_nansen(
         "smart-money netflow",
-        "--chain ethereum --timeframe 1h --limit 20",
-        demo_data=_DEMO["netflow_eth"] if demo else None,
+        f"--chain {chain} --timeframe 1h --limit 20",
+        demo_data=_DEMO.get(key, {"data": {"data": []}}) if demo else None,
     )
     return _list(data)
 
 
-def fetch_netflow_solana(demo=False) -> list:
-    """Smart Money net flows — Solana, 1h window."""
-    data = run_nansen(
-        "smart-money netflow",
-        "--chain solana --timeframe 1h --limit 20",
-        demo_data=_DEMO["netflow_sol"] if demo else None,
-    )
-    return _list(data)
-
-
-def fetch_dex_trades_ethereum(demo=False) -> list:
-    """Smart Money DEX trades — Ethereum, 1h window."""
+def fetch_dex_trades(chain: str, demo=False) -> list:
+    """Smart Money DEX trades for a specific chain, 1h window."""
+    key = f"dex_{chain[:3]}"
     data = run_nansen(
         "smart-money dex-trades",
-        "--chain ethereum --timeframe 1h --limit 10",
-        demo_data=_DEMO["dex_eth"] if demo else None,
+        f"--chain {chain} --timeframe 1h --limit 10",
+        demo_data=_DEMO.get(key, {"data": {"data": []}}) if demo else None,
     )
     return _list(data)
 
 
-def fetch_token_screener_ethereum(demo=False) -> list:
-    """Token screener — Ethereum, 1h timeframe."""
+def fetch_token_screener(chain: str, demo=False) -> list:
+    """Token screener for a specific chain, 1h timeframe."""
+    key = f"screener_{chain[:3]}"
     data = run_nansen(
         "token screener",
-        "--chain ethereum --timeframe 1h --limit 10",
-        demo_data=_DEMO["screener_eth"] if demo else None,
+        f"--chain {chain} --timeframe 1h --limit 10",
+        demo_data=_DEMO.get(key, {"data": {"data": []}}) if demo else None,
     )
     return _list(data)
 

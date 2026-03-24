@@ -214,6 +214,39 @@ Python 3.11+ recommended.
 
 ---
 
+## 🚀 Running in Background (Linux / Mac / Windows)
+
+Since Nansen CLI already requires Node.js/NPM, the easiest cross-platform way to run this agent 24/7 in the background is using [PM2](https://pm2.keymetrics.io/).
+
+### 1. Install PM2
+```bash
+npm install -g pm2
+```
+
+### 2. Start the Agent
+```bash
+pm2 start main.py --name "nansen-agent" --interpreter python3
+```
+
+### 3. Monitor Logs & Manage
+```bash
+pm2 status            # Check if it is online
+pm2 logs nansen-agent     # View real-time terminal output
+pm2 stop nansen-agent     # Stop the agent
+pm2 restart nansen-agent  # Restart the agent
+```
+
+### 4. (Optional) Run on Boot
+To make the agent start automatically when your server/computer restarts:
+```bash
+pm2 startup
+pm2 save
+```
+
+*(Alternatively, for pure Linux/Mac without PM2: `nohup python3 main.py > agent.log 2>&1 &`)*
+
+---
+
 *"Know before anyone else."*
 
 **Built with [Nansen CLI](https://agents.nansen.ai) · #NansenCLI · @nansen_ai**

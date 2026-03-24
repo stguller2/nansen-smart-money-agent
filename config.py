@@ -10,6 +10,9 @@ NANSEN_API_KEY: str = os.environ.get("NANSEN_API_KEY", "")
 TELEGRAM_BOT_TOKEN: str = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID:   str = os.environ.get("TELEGRAM_CHAT_ID", "")
 
+# ── Chains ──────────────────────────────────────────────────
+CHAINS: list[str] = ["ethereum", "solana", "arbitrum", "base"]
+
 # ── Polling ────────────────────────────────────────────────
 POLL_INTERVAL_MIN: int = 30        # schedule interval
 NANSEN_TIMEOUT_SEC: int = 25       # subprocess timeout
