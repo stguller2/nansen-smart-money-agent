@@ -31,50 +31,69 @@
         </div>
 
         <div class="flex-1">
-            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-700 pb-2">Filter Settings</h3>
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-700 pb-2">Agent Thresholds</h3>
             
-            <!-- Minimum Amount Slider -->
-            <div class="mb-6">
-                <label class="flex justify-between text-xs text-gray-300 font-bold mb-2">
-                    <span>Minimum Flow (USD)</span>
-                    <span id="min-amount-label" class="text-blue-400">$100,000</span>
+            <!-- Netflow Rule Slider -->
+            <div class="mb-5">
+                <label class="flex justify-between text-[11px] text-gray-400 font-bold mb-1">
+                    <span>🟢/🔴 Netflow Alert Trigger</span>
+                    <span class="text-green-400 font-mono">>$500,000</span>
                 </label>
-                <input type="range" id="min-amount-slider" min="10000" max="1000000" step="10000" value="100000" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                <input type="range" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-not-allowed opacity-70" disabled value="500">
             </div>
 
-            <!-- Signal Toggles -->
-            <div class="space-y-4 mb-8">
+            <!-- Whale DEX Slider -->
+            <div class="mb-5">
+                <label class="flex justify-between text-[11px] text-gray-400 font-bold mb-1">
+                    <span>🐋 Whale DEX Trade</span>
+                    <span class="text-blue-400 font-mono">>$250,000</span>
+                </label>
+                <input type="range" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-not-allowed opacity-70" disabled value="250">
+            </div>
+
+            <!-- Smart Wallet Count -->
+            <div class="mb-6">
+                <label class="flex justify-between text-[11px] text-gray-400 font-bold mb-1">
+                    <span>👛 Min. Smart Wallets</span>
+                    <span class="text-purple-400 font-mono">>= 3 Entities</span>
+                </label>
+                <input type="range" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-not-allowed opacity-70" disabled value="3">
+            </div>
+
+            <!-- Runtime Settings Toggles -->
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-700 pb-2 mt-2">Display Modules</h3>
+            <div class="space-y-3 mb-6">
                 <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-300">Show Emerging Tokens (Screener)</span>
-                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" id="show-screener" checked class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-400 top-0 bottom-0 m-auto z-10"/>
-                        <label for="show-screener" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-400 cursor-pointer"></label>
+                    <span class="text-[12px] text-gray-300 font-bold">Emerging Tokens (Screener)</span>
+                    <div class="relative inline-block w-8 mr-0 align-middle select-none">
+                        <input type="checkbox" id="show-screener" checked class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-400 top-0 bottom-0 m-auto z-10"/>
+                        <label for="show-screener" class="toggle-label block overflow-hidden h-4 rounded-full bg-gray-400 cursor-pointer"></label>
                     </div>
                 </div>
                 <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-300">Show Smart Money Netflows</span>
-                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" id="show-netflows" checked class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-400 top-0 bottom-0 m-auto z-10"/>
-                        <label for="show-netflows" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-400 cursor-pointer"></label>
+                    <span class="text-[12px] text-gray-300 font-bold">Smart Money Netflows</span>
+                    <div class="relative inline-block w-8 mr-0 align-middle select-none">
+                        <input type="checkbox" id="show-netflows" checked class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-400 top-0 bottom-0 m-auto z-10"/>
+                        <label for="show-netflows" class="toggle-label block overflow-hidden h-4 rounded-full bg-gray-400 cursor-pointer"></label>
                     </div>
                 </div>
                 <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-300">Enable VIP Stalker Mode</span>
-                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" id="show-vip" checked class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-400 top-0 bottom-0 m-auto z-10"/>
-                        <label for="show-vip" class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-400 cursor-pointer"></label>
+                    <span class="text-[12px] text-gray-300 font-bold">VIP Casus (Stalker) Mode</span>
+                    <div class="relative inline-block w-8 mr-0 align-middle select-none">
+                        <input type="checkbox" id="show-vip" checked class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-400 top-0 bottom-0 m-auto z-10"/>
+                        <label for="show-vip" class="toggle-label block overflow-hidden h-4 rounded-full bg-gray-400 cursor-pointer"></label>
                     </div>
                 </div>
             </div>
 
             <!-- Chain Filters -->
-            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-700 pb-2">Tracked Chains</h3>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter h-4 w-4 bg-gray-700" value="ethereum" checked> <span>Ethereum</span></label>
-                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter h-4 w-4 bg-gray-700" value="solana" checked> <span>Solana</span></label>
-                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter h-4 w-4 bg-gray-700" value="base" checked> <span>Base</span></label>
-                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter h-4 w-4 bg-gray-700" value="arbitrum" checked> <span>Arbitrum</span></label>
-                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter h-4 w-4 bg-gray-700" value="multi-chain" checked> <span>Cross-Chain</span></label>
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-700 pb-2">Active Chains</h3>
+            <div class="grid grid-cols-2 gap-y-2 text-xs">
+                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter appearance-none w-3 h-3 border border-gray-500 rounded-sm checked:bg-green-500" value="ethereum" checked> <span>Ethereum</span></label>
+                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter appearance-none w-3 h-3 border border-gray-500 rounded-sm checked:bg-green-500" value="solana" checked> <span>Solana</span></label>
+                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter appearance-none w-3 h-3 border border-gray-500 rounded-sm checked:bg-green-500" value="base" checked> <span>Base</span></label>
+                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter appearance-none w-3 h-3 border border-gray-500 rounded-sm checked:bg-green-500" value="arbitrum" checked> <span>Arbitrum</span></label>
+                <label class="flex items-center space-x-2 text-gray-400 cursor-pointer hover:text-white"><input type="checkbox" class="chain-filter appearance-none w-3 h-3 border border-gray-500 rounded-sm checked:bg-green-500" value="multi-chain" checked> <span>Cross-Chain</span></label>
             </div>
         </div>
 
