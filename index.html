@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Money Agent API</title>
+    <meta http-equiv="refresh" content="30">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+        .card { background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; }
+        .buy { color: #3fb950; }
+        .sell { color: #f85149; }
+        .whale { color: #58a6ff; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8 border-b border-gray-700 pb-5">
+            <div>
+                <h1 class="text-3xl font-bold text-white flex items-center gap-3">
+                    <span style="color:#00c896">Nansen</span> Intelligence Agent 
+                </h1>
+                <p class="text-gray-400 mt-2 text-sm tracking-wide">Serverless Live Tracker • Auto-Updating GitHub Pages Dashboard</p>
+            </div>
+            
+            <div class="text-right">
+                <div class="inline-flex items-center gap-2 bg-[#0d1117] border border-green-900 border-opacity-50 px-3 py-1.5 rounded-full">
+                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span class="text-xs text-green-400 font-mono">LIVE / MAINNET</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smart Money Top Holdings -->
+        <div id="holdings-container" class="mb-8 hidden">
+            <h2 class="text-sm uppercase text-gray-500 font-bold tracking-widest mb-3">Top Smart Money Holdings</h2>
+            <div id="holdings-grid" class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide"></div>
+        </div>
+
+        <!-- Grid -->
+        <h2 class="text-sm uppercase text-gray-500 font-bold tracking-widest mb-3 mt-4">Live Alpha Pipeline</h2>
+        <div id="signals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="col-span-full card p-10 text-center text-gray-500 border-dashed">
+                <div class="text-4xl mb-4 opacity-50 animate-pulse">📡</div>
+                Connecting to GitHub Actions Live Data Pipeline...<br>
+                Waiting for backend agent data loop.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchSmartMoneyData() {
+            try {
+                // Fetch Holdings 
+                const resHoldings = await fetch('outputs/holdings.json?t=' + Date.now());
+                if(resHoldings.ok) {
+                    const holdings = await resHoldings.json();
+                    if(holdings.length > 0) {
+                        document.getElementById('holdings-container').classList.remove('hidden');
+                        let html = '';
+                        holdings.slice(0, 5).forEach(h => {
+                            html += `
+                            <div class="card px-5 py-3 min-w-[220px] flex justify-between items-center bg-[#0d1117] border-indigo-900 border hover:border-indigo-600 transition-colors duration-200">
+                                <div>
+                                    <div class="text-white font-bold text-lg tracking-tight">${h.token_symbol || 'Unknown'}</div>
+                                    <div class="text-xs text-indigo-400 font-mono opacity-80">Qt: ${Number(h.amount || 0).toLocaleString()}</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-indigo-300 font-mono font-bold">$${Number(h.balance_usd || 0).toLocaleString()}</div>
+                                    <div class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">USD Value</div>
+                                </div>
+                            </div>`;
+                        });
+                        document.getElementById('holdings-grid').innerHTML = html;
+                    }
+                }
+
+                // Fetch Signals
+                const resSignals = await fetch('outputs/signals.json?t=' + Date.now());
+                if(resSignals.ok) {
+                    let signals = await resSignals.json();
+                    signals.reverse(); // newest first
+                    if(signals.length > 0) {
+                        let html = '';
+                        signals.slice(0, 48).forEach(sig => {
+                            let raw_signal = sig.signal_type || "";
+                            let flow = sig.flow_usd || 0;
+                            let the_color = "bg-green-900/40 text-green-400 border-green-800";
+                            if(raw_signal.includes("SELL")) the_color = "bg-red-900/40 text-red-400 border-red-800";
+                            else if(raw_signal.includes("WHALE") || raw_signal.includes("VIP")) the_color = "bg-blue-900/40 text-blue-400 border-blue-800";
+                            
+                            html += `
+                            <div class="card p-5 relative hover:border-gray-500 transition-colors duration-200">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="text-2xl font-bold text-white tracking-tight">${sig.token}</div>
+                                    <div class="text-[10px] font-bold px-2 py-1 rounded tracking-wider border ${the_color}">
+                                        ${sig.signal_type}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4 text-xs font-mono text-gray-400 uppercase tracking-widest flex justify-between items-center">
+                                    <span>${sig.chain}</span>
+                                    <span class="bg-gray-800 px-2 py-0.5 rounded text-white border border-gray-700">SCORE: ${sig.confidence_score}/100</span>
+                                </div>
+                                
+                                <div class="text-2xl font-mono font-bold mb-4 tracking-tight ${flow > 0 ? 'buy' : 'sell'}">
+                                    ${flow > 0 ? '+' : '-'}$${Math.abs(flow).toLocaleString(undefined, {maximumFractionDigits:0})}
+                                </div>
+                                
+                                <div class="text-[13px] bg-[#0d1117] p-3 rounded border border-gray-800 leading-relaxed text-gray-300 shadow-inner">
+                                    <span class="text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-1.5 block">🧠 Alpha Insight</span>
+                                    ${sig.explanation || ''}
+                                </div>
+                                
+                                <div class="mt-4 pt-3 border-t border-gray-800 text-[11px] text-gray-500 text-right font-mono flex justify-between items-center">
+                                    <span>${sig.sm_wallets || 0} SM Wallets</span>
+                                    <span>${(sig.timestamp || "Unknown").substring(0,16).replace("T", " ")} UTC</span>
+                                </div>
+                            </div>`;
+                        });
+                        document.getElementById('signals-grid').innerHTML = html;
+                    }
+                }
+            } catch(e) {
+                console.log("No outputs found yet, waiting for backend cron pipeline to compile.");
+            }
+        }
+        
+        fetchSmartMoneyData();
+    </script>
+</body>
+</html>
