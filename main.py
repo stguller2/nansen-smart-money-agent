@@ -63,6 +63,12 @@ def poll(demo: bool = False):
         print(f"       {len(txs)} transaction(s) returned")
         vip_data[name] = {"rows": txs, "address": address}
 
+    print(f"  📡  Gathering Smart Money aggregated holdings (Ethereum)...")
+    holdings = fetcher.fetch_smart_money_holdings("ethereum", demo=demo)
+    import json
+    with open("outputs/holdings.json", "w") as f:
+        json.dump(holdings, f)
+
     print(f"\n  📊  Total API calls so far: {fetcher.total_calls}")
 
     # Run analyzers

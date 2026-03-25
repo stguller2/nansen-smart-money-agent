@@ -122,6 +122,17 @@ def fetch_wallet_transactions(address: str, demo=False) -> list:
     return _list(data)
 
 
+def fetch_smart_money_holdings(chain: str, demo=False) -> list:
+    """Aggregated Top Token balances held by Smart Money on a chain."""
+    key = f"holdings_{chain[:3]}"
+    data = run_nansen(
+        "research smart-money holdings",
+        f"--chain {chain} --limit 5",
+        demo_data=_DEMO.get(key, {"data": {"data": []}}) if demo else None,
+    )
+    return _list(data)
+
+
 # ── demo / test data ───────────────────────────────────────
 
 _DEMO: dict[str, dict] = {

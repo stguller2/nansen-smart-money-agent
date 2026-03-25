@@ -12,7 +12,9 @@ templates = Jinja2Templates(directory="templates")
 async def read_dashboard(request: Request):
     """Serve the main dashboard page."""
     sig_path = "outputs/signals.json"
+    holdings_path = "outputs/holdings.json"
     signals = []
+    holdings = []
     
     if os.path.exists(sig_path):
         try:
@@ -22,9 +24,17 @@ async def read_dashboard(request: Request):
         except Exception:
             pass
             
+    if os.path.exists(holdings_path):
+        try:
+            with open(holdings_path, "r") as f:
+                holdings = json.load(f)[:5] # Show top 5 holdings
+        except Exception:
+            pass
+            
     return templates.TemplateResponse("index.html", {
         "request": request, 
-        "signals": signals[:48]  # Show recent 48
+        "signals": signals[:48],
+        "holdings": holdings
     })
 
 @app.get("/api/signals")
