@@ -7,6 +7,13 @@ on:
   workflow_dispatch:
     # Kullanıcının GitHub'dan eliyle "Çalıştır" butonuna basmasına da izin verir
 
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"
+
 jobs:
   run-agent:
     name: Run Poller
@@ -45,7 +52,7 @@ jobs:
           python main.py --demo --once
 
       - name: 🌍 Deploy Live Dashboard to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .  
