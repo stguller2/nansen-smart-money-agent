@@ -115,7 +115,38 @@ def analyze_dex_trades(rows: list, chain: str) -> list[Alert]:
     return alerts
 
 
-def run_all(data_by_chain: dict) -> list[Alert]:
+def analyze_vip_wallets(rows: list, wallet_name: str, address: str) -> list[Alert]:
+    """Detect significant transactions from tracked VIP wallets."""
+    alerts: list[Alert] = []
+
+    for tx in rows:
+        value = float(tx.get("value_usd", 0) or tx.get("amount_usd", 0) or 0)
+        
+        if value < config.VIP_TX_USD_MIN:
+            continue
+
+        token = tx.get("token_symbol", tx.get("asset", "UNKNOWN"))
+        hash_ = tx.get("transaction_hash", tx.get("hash", "0x"))[:10] + "..."
+        from_adr = tx.get("from_address", "").lower()
+        
+        direction = "sold/sent" if from_adr == address.lower() else "bought/received"
+        sign = -1.0 if from_adr == address.lower() else 1.0
+        
+        alerts.append(Alert(
+            signal = "VIP WALLET",
+            token = token,
+            chain = "multi-chain", # Nansen profiler searches cross-chain
+            flow_usd = value * sign,
+            sm_wallets = 1,
+            score = 10.0, # Complete 100/100 conviction for VIPs
+            label = wallet_name,
+            extra = f"{wallet_name} {direction} {token} | tx {hash_}"
+        ))
+
+    return alerts
+
+
+def run_all(data_by_chain: dict, vip_data: dict = None) -> list[Alert]:
     """Aggregate all detectors and return unique alerts for all chains."""
     alerts = []
     
@@ -123,4 +154,8 @@ def run_all(data_by_chain: dict) -> list[Alert]:
         alerts.extend(analyze_netflows(netflows, chain))
         alerts.extend(analyze_dex_trades(dexes, chain))
         
+    if vip_data:
+        for name, data_bundle in vip_data.items():
+            alerts.extend(analyze_vip_wallets(data_bundle["rows"], name, data_bundle["address"]))
+            
     return alerts

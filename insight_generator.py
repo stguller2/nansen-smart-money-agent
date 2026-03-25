@@ -23,4 +23,9 @@ def generate_insight(alert) -> str:
                 f"massive DEX swap worth ${alert.flow_usd:,.0f} involving {alert.token} "
                 f"on {alert.chain.capitalize()}. Watch out for immediate volatility.")
                 
+    elif alert.signal == "VIP WALLET":
+        return (f"🚨 TARGET SHADOWED! {alert.label} just executed a mega move! "
+                f"They moved approx ${abs(alert.flow_usd):,.0f} of {alert.token}. "
+                f"When top-tier crypto figures make transfers this large, the market follows.")
+                
     return f"Smart money activity detected for {alert.token}. Flow: ${alert.flow_usd:,.0f}."

@@ -55,10 +55,18 @@ def poll(demo: bool = False):
     screener_eth = fetcher.fetch_token_screener("ethereum", demo=demo)
     print(f"       {len(screener_eth)} token(s) returned")
 
+    # Fetch VIP Wallets
+    vip_data = {}
+    for name, address in config.TRACKED_WALLETS.items():
+        print(f"  📡  Shadowing VIP Wallet ({name})...")
+        txs = fetcher.fetch_wallet_transactions(address, demo=demo)
+        print(f"       {len(txs)} transaction(s) returned")
+        vip_data[name] = {"rows": txs, "address": address}
+
     print(f"\n  📊  Total API calls so far: {fetcher.total_calls}")
 
     # Run analyzers
-    alerts = analyzer.run_all(data_by_chain)
+    alerts = analyzer.run_all(data_by_chain, vip_data)
 
     if not alerts:
         print("\n  ✅  No signals triggered this cycle.")

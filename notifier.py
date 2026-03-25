@@ -14,11 +14,13 @@ _SIGNAL_EMOJI = {
     "STRONG BUY":  "🟢",
     "STRONG SELL": "🔴",
     "WHALE MOVE":  "🐋",
+    "VIP WALLET":  "👑",
 }
 
 _CHAIN_EMOJI = {
-    "ethereum": "⟠",
-    "solana":   "◎",
+    "ethereum":    "⟠",
+    "solana":      "◎",
+    "multi-chain": "🌐",
 }
 
 

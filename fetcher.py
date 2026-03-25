@@ -112,9 +112,45 @@ def fetch_token_screener(chain: str, demo=False) -> list:
     return _list(data)
 
 
+def fetch_wallet_transactions(address: str, demo=False) -> list:
+    """Fetch recent transactions / transfers for a specific tracked VIP wallet."""
+    data = run_nansen(
+        "research profiler transactions",
+        f"--address {address} --limit 10",
+        demo_data=_DEMO.get(f"vip_{address[-4:]}") if demo else None,
+    )
+    return _list(data)
+
+
 # ── demo / test data ───────────────────────────────────────
 
 _DEMO: dict[str, dict] = {
+    "vip_6045": {  # Vitalik mock
+        "success": True,
+        "data": {"data": [
+            {
+                "transaction_hash": "0x1a2b3c4d5e...",
+                "block_timestamp": "2026-03-24T22:30:00",
+                "from_address": "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+                "to_address": "0xpool...",
+                "token_symbol": "ETH",
+                "value_usd": 150_000.0,
+            }
+        ]}
+    },
+    "vip_5296": {  # Justin Sun mock
+        "success": True,
+        "data": {"data": [
+            {
+                "transaction_hash": "0x9f8e7d6c5b...",
+                "block_timestamp": "2026-03-24T22:31:00",
+                "to_address": "0x3ddfa8ec3052539b6c9549f12cea2c295cff5296",
+                "from_address": "0xbinance...",
+                "token_symbol": "USDT",
+                "value_usd": 2_500_000.0,
+            }
+        ]}
+    },
     "netflow_eth": {
         "success": True,
         "data": {"data": [

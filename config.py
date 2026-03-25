@@ -33,6 +33,14 @@ CHAINS: list[str] = [
     "linea"
 ]
 
+# ── VIP Tracked Wallets (Stalking) ──────────────────────────
+# Users can add any wallet address here to shadow them 24/7
+TRACKED_WALLETS: dict[str, str] = {
+    "Vitalik Buterin": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "Justin Sun": "0x3DdfA8eC3052539b6C9549F12cEA2C295cfF5296"
+}
+VIP_TX_USD_MIN: float = 10_000   # Minimum $10k transfer to trigger VIP alert
+
 # ── Polling ────────────────────────────────────────────────
 POLL_INTERVAL_MIN: int = 30        # schedule interval
 NANSEN_TIMEOUT_SEC: int = 25       # subprocess timeout
