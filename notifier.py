@@ -15,6 +15,7 @@ _SIGNAL_EMOJI = {
     "STRONG SELL": "🔴",
     "WHALE MOVE":  "🐋",
     "VIP WALLET":  "👑",
+    "TRENDING TOKEN": "📈",
 }
 
 _CHAIN_EMOJI = {

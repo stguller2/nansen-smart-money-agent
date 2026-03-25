@@ -28,4 +28,9 @@ def generate_insight(alert) -> str:
                 f"They moved approx ${abs(alert.flow_usd):,.0f} of {alert.token}. "
                 f"When top-tier crypto figures make transfers this large, the market follows.")
                 
+    elif alert.signal == "TRENDING TOKEN":
+        return (f"📈 TRENDING ALPHA DETECTED! {alert.token} just printed a major volume "
+                f"spike (${alert.flow_usd:,.0f} traded) along with strong price action. "
+                f"This matches early metrics of a hot emerging opportunity.")
+                
     return f"Smart money activity detected for {alert.token}. Flow: ${alert.flow_usd:,.0f}."

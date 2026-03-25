@@ -72,7 +72,7 @@ def poll(demo: bool = False):
     print(f"\n  📊  Total API calls so far: {fetcher.total_calls}")
 
     # Run analyzers
-    alerts = analyzer.run_all(data_by_chain, vip_data)
+    alerts = analyzer.run_all(data_by_chain, vip_data, screener_data=screener_eth)
 
     if not alerts:
         print("\n  ✅  No signals triggered this cycle.")

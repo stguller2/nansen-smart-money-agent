@@ -146,7 +146,35 @@ def analyze_vip_wallets(rows: list, wallet_name: str, address: str) -> list[Aler
     return alerts
 
 
-def run_all(data_by_chain: dict, vip_data: dict = None) -> list[Alert]:
+def analyze_screener(rows: list, chain: str) -> list[Alert]:
+    """Detect new, trending tokens based on volume anomalies and price action."""
+    alerts: list[Alert] = []
+    
+    for tk in rows:
+        symbol = tk.get("token_symbol", "UNKNOWN")
+        volume = float(tk.get("volume", 0) or 0)
+        mcap = float(tk.get("market_cap_usd", 0) or 0)
+        price_change = float(tk.get("price_change", 0) or 0)
+        
+        # Kural: Nansen'in "Emerging Opportunities" (Use Case 4) konsepti için
+        # Eğer hacim 10 Milyon doların üzerindeyse ve fiyat %1'den fazla artıyorsa:
+        if volume >= 10_000_000 and price_change >= 0.01:
+            score = min(10.0, price_change * 300) # Yapay zeka skoru (ör: %3 artış -> ~9 skor)
+            alerts.append(Alert(
+                signal = "TRENDING TOKEN",
+                token = symbol,
+                chain = chain,
+                flow_usd = volume, # Para akışı olarak Gecelik Hacim kullanılıyor
+                sm_wallets = 0,
+                score = score,
+                label = "Token Screener",
+                extra = f"🔥 Trend Detected! Vol: ${volume:,.0f} | MCAP: ${mcap:,.0f} | Price Change: +{price_change*100:.1f}%"
+            ))
+            
+    return alerts
+
+
+def run_all(data_by_chain: dict, vip_data: dict = None, screener_data: list = None) -> list[Alert]:
     """Aggregate all detectors and return unique alerts for all chains."""
     alerts = []
     
@@ -157,5 +185,8 @@ def run_all(data_by_chain: dict, vip_data: dict = None) -> list[Alert]:
     if vip_data:
         for name, data_bundle in vip_data.items():
             alerts.extend(analyze_vip_wallets(data_bundle["rows"], name, data_bundle["address"]))
+            
+    if screener_data:
+        alerts.extend(analyze_screener(screener_data, "ethereum"))
             
     return alerts
