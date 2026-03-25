@@ -17,9 +17,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 🟢 Setup Node.js (for Nansen CLI)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: ⚡ Install Nansen CLI
         run: npm install -g nansen-cli
@@ -33,18 +33,16 @@ jobs:
       - name: 📚 Install Python Dependencies
         run: pip install -r requirements.txt
 
-      - name: 🔑 Login to Nansen
+      - name: 🤖 Run Smart Money Agent (DEMO MODE)
         env:
-          NANSEN_API_KEY: ${{ secrets.NANSEN_API_KEY }}
-        run: nansen login --api-key $NANSEN_API_KEY
-
-      - name: 🤖 Run Smart Money Agent
-        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
           NANSEN_API_KEY: ${{ secrets.NANSEN_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: python main.py --once
+        run: |
+          # Yarışma Jürisi ve Dışarıdan Katılanlar için API Kredisiz DEMO tetikleyici
+          python main.py --demo --once
 
       - name: 🌍 Deploy Live Dashboard to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
