@@ -1,0 +1,47 @@
+name: 🚀 Nansen Smart Money Agent
+
+on:
+  schedule:
+    # Her 30 dakikada bir otomatik çalışır
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    # Kullanıcının GitHub'dan eliyle "Çalıştır" butonuna basmasına da izin verir
+
+jobs:
+  run-agent:
+    name: Run Poller
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js (for Nansen CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: ⚡ Install Nansen CLI
+        run: npm install -g nansen-cli
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📚 Install Python Dependencies
+        run: pip install -r requirements.txt
+
+      - name: 🔑 Login to Nansen
+        env:
+          NANSEN_API_KEY: ${{ secrets.NANSEN_API_KEY }}
+        run: nansen login --api-key $NANSEN_API_KEY
+
+      - name: 🤖 Run Smart Money Agent
+        env:
+          NANSEN_API_KEY: ${{ secrets.NANSEN_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python main.py --once
