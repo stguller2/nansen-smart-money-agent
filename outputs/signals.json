@@ -1,0 +1,182 @@
+[
+  {
+    "token": "WBTC",
+    "signal_type": "STRONG BUY",
+    "confidence_score": 91.0,
+    "explanation": "5 smart money wallets heavily accumulated WBTC in the last 1 hour across Ethereum. Total net inflow stands at +$820,000. This indicates a potential early accumulation or cluster buying phase.",
+    "chain": "ethereum",
+    "flow_usd": 820000.0,
+    "timestamp": "2026-03-25T04:37:15.411857+00:00"
+  },
+  {
+    "token": "PEPE",
+    "signal_type": "STRONG SELL",
+    "confidence_score": 70.5,
+    "explanation": "4 smart money wallets have been offloading PEPE on Ethereum. Net outflow reached -$610,000 in the last hour, signaling potential exhaustion or rotation out of this asset.",
+    "chain": "ethereum",
+    "flow_usd": -610000.0,
+    "timestamp": "2026-03-25T04:37:15.412131+00:00"
+  },
+  {
+    "token": "WBTC",
+    "signal_type": "WHALE MOVE",
+    "confidence_score": 54.1,
+    "explanation": "A sudden position change detected! Wintermute Trading executed a massive DEX swap worth $312,000 involving WBTC on Ethereum. Watch out for immediate volatility.",
+    "chain": "ethereum",
+    "flow_usd": 312000.0,
+    "timestamp": "2026-03-25T04:37:15.412449+00:00"
+  },
+  {
+    "token": "JTO",
+    "signal_type": "STRONG BUY",
+    "confidence_score": 86.5,
+    "explanation": "6 smart money wallets heavily accumulated JTO in the last 1 hour across Solana. Total net inflow stands at +$530,000. This indicates a potential early accumulation or cluster buying phase.",
+    "chain": "solana",
+    "flow_usd": 530000.0,
+    "timestamp": "2026-03-25T04:37:15.412754+00:00"
+  },
+  {
+    "token": "ETH",
+    "signal_type": "VIP WALLET",
+    "confidence_score": 100.0,
+    "explanation": "\ud83d\udea8 TARGET SHADOWED! Vitalik Buterin just executed a mega move! They moved approx $150,000 of ETH. When top-tier crypto figures make transfers this large, the market follows.",
+    "chain": "multi-chain",
+    "flow_usd": -150000.0,
+    "timestamp": "2026-03-25T04:37:15.413168+00:00"
+  },
+  {
+    "token": "USDT",
+    "signal_type": "VIP WALLET",
+    "confidence_score": 100.0,
+    "explanation": "\ud83d\udea8 TARGET SHADOWED! Justin Sun just executed a mega move! They moved approx $2,500,000 of USDT. When top-tier crypto figures make transfers this large, the market follows.",
+    "chain": "multi-chain",
+    "flow_usd": 2500000.0,
+    "timestamp": "2026-03-25T04:37:15.413388+00:00"
+  },
+  {
+    "token": "WBTC",
+    "signal_type": "STRONG BUY",
+    "confidence_score": 91.0,
+    "explanation": "5 smart money wallets heavily accumulated WBTC in the last 1 hour across Ethereum. Total net inflow stands at +$820,000. This indicates a potential early accumulation or cluster buying phase.",
+    "chain": "ethereum",
+    "flow_usd": 820000.0,
+    "timestamp": "2026-03-25T04:37:42.212311+00:00"
+  },
+  {
+    "token": "PEPE",
+    "signal_type": "STRONG SELL",
+    "confidence_score": 70.5,
+    "explanation": "4 smart money wallets have been offloading PEPE on Ethereum. Net outflow reached -$610,000 in the last hour, signaling potential exhaustion or rotation out of this asset.",
+    "chain": "ethereum",
+    "flow_usd": -610000.0,
+    "timestamp": "2026-03-25T04:37:42.212570+00:00"
+  },
+  {
+    "token": "WBTC",
+    "signal_type": "WHALE MOVE",
+    "confidence_score": 54.1,
+    "explanation": "A sudden position change detected! Wintermute Trading executed a massive DEX swap worth $312,000 involving WBTC on Ethereum. Watch out for immediate volatility.",
+    "chain": "ethereum",
+    "flow_usd": 312000.0,
+    "timestamp": "2026-03-25T04:37:42.212789+00:00"
+  },
+  {
+    "token": "JTO",
+    "signal_type": "STRONG BUY",
+    "confidence_score": 86.5,
+    "explanation": "6 smart money wallets heavily accumulated JTO in the last 1 hour across Solana. Total net inflow stands at +$530,000. This indicates a potential early accumulation or cluster buying phase.",
+    "chain": "solana",
+    "flow_usd": 530000.0,
+    "timestamp": "2026-03-25T04:37:42.212996+00:00"
+  },
+  {
+    "token": "ETH",
+    "signal_type": "VIP WALLET",
+    "confidence_score": 100.0,
+    "explanation": "\ud83d\udea8 TARGET SHADOWED! Vitalik Buterin just executed a mega move! They moved approx $150,000 of ETH. When top-tier crypto figures make transfers this large, the market follows.",
+    "chain": "multi-chain",
+    "flow_usd": -150000.0,
+    "timestamp": "2026-03-25T04:37:42.213331+00:00"
+  },
+  {
+    "token": "USDT",
+    "signal_type": "VIP WALLET",
+    "confidence_score": 100.0,
+    "explanation": "\ud83d\udea8 TARGET SHADOWED! Justin Sun just executed a mega move! They moved approx $2,500,000 of USDT. When top-tier crypto figures make transfers this large, the market follows.",
+    "chain": "multi-chain",
+    "flow_usd": 2500000.0,
+    "timestamp": "2026-03-25T04:37:42.213558+00:00"
+  },
+  {
+    "token": "WBTC",
+    "signal_type": "STRONG BUY",
+    "confidence_score": 91.0,
+    "explanation": "5 smart money wallets heavily accumulated WBTC in the last 1 hour across Ethereum. Total net inflow stands at +$820,000. This indicates a potential early accumulation or cluster buying phase.",
+    "chain": "ethereum",
+    "flow_usd": 820000.0,
+    "timestamp": "2026-03-25T19:33:57.368569+00:00"
+  },
+  {
+    "token": "PEPE",
+    "signal_type": "STRONG SELL",
+    "confidence_score": 70.5,
+    "explanation": "4 smart money wallets have been offloading PEPE on Ethereum. Net outflow reached -$610,000 in the last hour, signaling potential exhaustion or rotation out of this asset.",
+    "chain": "ethereum",
+    "flow_usd": -610000.0,
+    "timestamp": "2026-03-25T19:33:57.369113+00:00"
+  },
+  {
+    "token": "WBTC",
+    "signal_type": "WHALE MOVE",
+    "confidence_score": 54.1,
+    "explanation": "A sudden position change detected! Wintermute Trading executed a massive DEX swap worth $312,000 involving WBTC on Ethereum. Watch out for immediate volatility.",
+    "chain": "ethereum",
+    "flow_usd": 312000.0,
+    "timestamp": "2026-03-25T19:33:57.369717+00:00"
+  },
+  {
+    "token": "JTO",
+    "signal_type": "STRONG BUY",
+    "confidence_score": 86.5,
+    "explanation": "6 smart money wallets heavily accumulated JTO in the last 1 hour across Solana. Total net inflow stands at +$530,000. This indicates a potential early accumulation or cluster buying phase.",
+    "chain": "solana",
+    "flow_usd": 530000.0,
+    "timestamp": "2026-03-25T19:33:57.370339+00:00"
+  },
+  {
+    "token": "ETH",
+    "signal_type": "VIP WALLET",
+    "confidence_score": 100.0,
+    "explanation": "\ud83d\udea8 TARGET SHADOWED! Vitalik Buterin just executed a mega move! They moved approx $150,000 of ETH. When top-tier crypto figures make transfers this large, the market follows.",
+    "chain": "multi-chain",
+    "flow_usd": -150000.0,
+    "timestamp": "2026-03-25T19:33:57.370931+00:00"
+  },
+  {
+    "token": "USDT",
+    "signal_type": "VIP WALLET",
+    "confidence_score": 100.0,
+    "explanation": "\ud83d\udea8 TARGET SHADOWED! Justin Sun just executed a mega move! They moved approx $2,500,000 of USDT. When top-tier crypto figures make transfers this large, the market follows.",
+    "chain": "multi-chain",
+    "flow_usd": 2500000.0,
+    "timestamp": "2026-03-25T19:33:57.371556+00:00"
+  },
+  {
+    "token": "WBTC",
+    "signal_type": "TRENDING TOKEN",
+    "confidence_score": 63.0,
+    "explanation": "\ud83d\udcc8 TRENDING ALPHA DETECTED! WBTC just printed a major volume spike ($85,000,000 traded) along with strong price action. This matches early metrics of a hot emerging opportunity.",
+    "chain": "ethereum",
+    "flow_usd": 85000000.0,
+    "timestamp": "2026-03-25T19:33:57.372318+00:00"
+  },
+  {
+    "token": "LINK",
+    "signal_type": "TRENDING TOKEN",
+    "confidence_score": 42.0,
+    "explanation": "\ud83d\udcc8 TRENDING ALPHA DETECTED! LINK just printed a major volume spike ($22,000,000 traded) along with strong price action. This matches early metrics of a hot emerging opportunity.",
+    "chain": "ethereum",
+    "flow_usd": 22000000.0,
+    "timestamp": "2026-03-25T19:33:57.373777+00:00"
+  }
+]
