@@ -114,7 +114,7 @@
     "explanation": "5 smart money wallets heavily accumulated WBTC in the last 1 hour across Ethereum. Total net inflow stands at +$820,000. This indicates a potential early accumulation or cluster buying phase.",
     "chain": "ethereum",
     "flow_usd": 820000.0,
-    "timestamp": "2026-04-01T23:06:18.086376+00:00"
+    "timestamp": "2026-04-01T23:58:17.656163+00:00"
   },
   {
     "token": "PEPE",
@@ -123,7 +123,7 @@
     "explanation": "4 smart money wallets have been offloading PEPE on Ethereum. Net outflow reached -$610,000 in the last hour, signaling potential exhaustion or rotation out of this asset.",
     "chain": "ethereum",
     "flow_usd": -610000.0,
-    "timestamp": "2026-04-01T23:06:18.086916+00:00"
+    "timestamp": "2026-04-01T23:58:17.656728+00:00"
   },
   {
     "token": "WBTC",
@@ -132,7 +132,7 @@
     "explanation": "A sudden position change detected! Wintermute Trading executed a massive DEX swap worth $312,000 involving WBTC on Ethereum. Watch out for immediate volatility.",
     "chain": "ethereum",
     "flow_usd": 312000.0,
-    "timestamp": "2026-04-01T23:06:18.087455+00:00"
+    "timestamp": "2026-04-01T23:58:17.657223+00:00"
   },
   {
     "token": "JTO",
@@ -141,7 +141,7 @@
     "explanation": "6 smart money wallets heavily accumulated JTO in the last 1 hour across Solana. Total net inflow stands at +$530,000. This indicates a potential early accumulation or cluster buying phase.",
     "chain": "solana",
     "flow_usd": 530000.0,
-    "timestamp": "2026-04-01T23:06:18.088028+00:00"
+    "timestamp": "2026-04-01T23:58:17.657832+00:00"
   },
   {
     "token": "ETH",
@@ -150,7 +150,7 @@
     "explanation": "\ud83d\udea8 TARGET SHADOWED! Vitalik Buterin just executed a mega move! They moved approx $150,000 of ETH. When top-tier crypto figures make transfers this large, the market follows.",
     "chain": "multi-chain",
     "flow_usd": -150000.0,
-    "timestamp": "2026-04-01T23:06:18.088569+00:00"
+    "timestamp": "2026-04-01T23:58:17.658366+00:00"
   },
   {
     "token": "USDT",
@@ -159,7 +159,7 @@
     "explanation": "\ud83d\udea8 TARGET SHADOWED! Justin Sun just executed a mega move! They moved approx $2,500,000 of USDT. When top-tier crypto figures make transfers this large, the market follows.",
     "chain": "multi-chain",
     "flow_usd": 2500000.0,
-    "timestamp": "2026-04-01T23:06:18.089133+00:00"
+    "timestamp": "2026-04-01T23:58:17.658902+00:00"
   },
   {
     "token": "WBTC",
@@ -168,7 +168,7 @@
     "explanation": "\ud83d\udcc8 TRENDING ALPHA DETECTED! WBTC just printed a major volume spike ($85,000,000 traded) along with strong price action. This matches early metrics of a hot emerging opportunity.",
     "chain": "ethereum",
     "flow_usd": 85000000.0,
-    "timestamp": "2026-04-01T23:06:18.089794+00:00"
+    "timestamp": "2026-04-01T23:58:17.659610+00:00"
   },
   {
     "token": "LINK",
@@ -177,6 +177,6 @@
     "explanation": "\ud83d\udcc8 TRENDING ALPHA DETECTED! LINK just printed a major volume spike ($22,000,000 traded) along with strong price action. This matches early metrics of a hot emerging opportunity.",
     "chain": "ethereum",
     "flow_usd": 22000000.0,
-    "timestamp": "2026-04-01T23:06:18.091264+00:00"
+    "timestamp": "2026-04-01T23:58:17.661527+00:00"
   }
 ]
